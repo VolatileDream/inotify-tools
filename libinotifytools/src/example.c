@@ -7,11 +7,17 @@
  * libinotifytools example program.
  * Compile with gcc -linotifytools example.c
  */
-int main() {
+int main(int argc, char** argv) {
+
+	char * path = ".";
+	if( argc > 1 ){
+		path = argv[1];
+	}
+
 	// initialize and watch the entire directory tree from the current working
 	// directory downwards for all events
 	if ( !inotifytools_initialize()
-	  || !inotifytools_watch_recursively( ".", IN_ALL_EVENTS ) ) {
+	  || !inotifytools_watch_recursively( path, IN_ALL_EVENTS ) ) {
 		fprintf(stderr, "%s\n", strerror( inotifytools_error() ) );
 		return -1;
 	}

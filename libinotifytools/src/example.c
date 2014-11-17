@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
 	struct inotify_event * event = inotifytools_next_event( -1 );
 	while ( event ) {
 		inotifytools_printf( event, "%w%f\n" );
+		fflush(stdout); // this fixes all issues with working with pipes
 		event = inotifytools_next_event( -1 );
 	}
 }
